@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:postgresql://localhost:5432/queue_up</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="Queue-Up" uuid="d3a6dcee-c61b-4b4b-9e0f-3675762e98fc">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://ec2-34-199-68-114.compute-1.amazonaws.com/d1q3htqnbg1m28</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>
