@@ -83,7 +83,7 @@ public class AdminStatusController {
             senderService.sendEmail(tokenRepo.getEmailFromView(tokenGap),
                     "Queue Notification",
                     "Your turn is about to come please get to Queue as soon as possible. \n\n\n\n" +
-                            "Tokens before your token number: "+tokenGap);
+                            "Number of people in queue before you: "+tokenGap);
             tokenRepo.setUserStatustoComplete(token_number);
             tokenRepo.setStatusChangedByAdmin(token_number);
             return "redirect:/admin/status/"+user_name;
@@ -101,7 +101,7 @@ public class AdminStatusController {
             senderService.sendEmail(tokenRepo.getEmailFromView(tokenGap),
                     "Queue Notification",
                     "Your turn is about to come please get to Queue as soon as possible. \n\n\n\n" +
-                            "Tokens before your token number: "+tokenGap);
+                            "Number of people in queue before you: "+tokenGap);
             tokenRepo.setUserStatusToAbsent(token_number);
             tokenRepo.setStatusChangedByAdmin(token_number);
             return "redirect:/admin/status/"+user_name;
@@ -119,7 +119,7 @@ public class AdminStatusController {
             senderService.sendEmail(tokenRepo.getEmailFromView(tokenGap),
                     "Queue Notification",
                     "Your turn is about to come please get to Queue as soon as possible. \n\n\n\n" +
-                            "Tokens before your token number: "+tokenGap);
+                            "Number of people in queue before you: "+tokenGap);
             tokenRepo.setUserStatusToCancelled(token_number);
             tokenRepo.setStatusChangedByAdmin(token_number);
             return "redirect:/admin/status/"+user_name;
