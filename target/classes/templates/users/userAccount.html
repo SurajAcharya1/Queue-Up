@@ -42,7 +42,7 @@
           <span>My Token</span></a>
       </li>
       <li class="nav-item">
-        <a th:href="@{~/user/history/}+${userName}"> <span class="las la-ticket-alt"></span>
+        <a th:href="@{~/user/history/}+${userName}"> <span class="las la-history"></span>
           <span>History</span></a>
       </li>
       <li class="nav-item">
@@ -60,7 +60,7 @@
       Dashboard
     </h2>
     <div class="user-wrapper">
-      <a th:href="@{~/user/account}">
+      <a th:href="@{~/user/account/}+${userName}">
         <div>
           <h4 th:text="${userName}"></h4>
           <small>User</small>
