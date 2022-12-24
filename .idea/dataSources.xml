@@ -12,7 +12,7 @@
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://ec2-34-199-68-114.compute-1.amazonaws.com/d1q3htqnbg1m28</jdbc-url>
+      <jdbc-url>jdbc:postgresql://containers-us-west-187.railway.app:7073/railway</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
