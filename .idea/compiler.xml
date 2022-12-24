@@ -7,6 +7,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="Queue-UpHostable" />
         <module name="Queue-upHeroku" />
         <module name="qup" />
         <module name="Queue-up" />
@@ -16,6 +17,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Queue-UpHostable" options="-parameters" />
       <module name="Queue-up" options="-parameters" />
       <module name="Queue-up Heroku" options="-parameters" />
       <module name="Queue-upHeroku" options="-parameters" />
