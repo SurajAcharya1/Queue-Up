@@ -57,6 +57,7 @@ public class IndexController {
                 userRepo.createAdminIfNull(passwordEncryption.getEncryptedPassword("admin"));
             }
             tokenRepo.deleteByDate(localDate);
+            System.out.println(localDate);
             keyRepo.deleteAllKey(localDate);
         }catch (Exception e){
             System.out.println(e);
