@@ -51,14 +51,16 @@ public class IndexController {
         Date date = new Date();
         SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy");
         model.addAttribute("date",dateFormatter.format(date));
+        long mills = System.currentTimeMillis();
+        java.sql.Date date1 = new java.sql.Date(mills);
         //logInController.loggedInUserid=null;
         try {
             if(userRepo.countAdmin()==0){
                 userRepo.createAdminIfNull(passwordEncryption.getEncryptedPassword("admin"));
             }
-            tokenRepo.deleteByDate(localDate);
-            System.out.println(localDate);
-            keyRepo.deleteAllKey(localDate);
+            tokenRepo.deleteByDate(date1.toLocalDate());
+            System.out.println(date1.toLocalDate());
+            keyRepo.deleteAllKey(date1.toLocalDate());
         }catch (Exception e){
             System.out.println(e);
         }
