@@ -15,7 +15,8 @@ import java.util.stream.Collectors;
 public class KeyServiceImpl implements KeyService{
     private final KeyRepo keyRepo;
 
-    LocalDate localDate = LocalDate.now();
+    long mills = System.currentTimeMillis();
+    java.sql.Date date = new java.sql.Date(mills);
 
     public KeyServiceImpl(KeyRepo keyRepo) {
 
@@ -30,7 +31,7 @@ public class KeyServiceImpl implements KeyService{
                 .name(keyDto.getName())
                 .key(keyDto.getKey())
                 .build();
-        entity.setDate(localDate);
+        entity.setDate(date.toLocalDate());
         if(keyRepo.findAll().size()==0){
             entity = keyRepo.save(entity);
         }else {

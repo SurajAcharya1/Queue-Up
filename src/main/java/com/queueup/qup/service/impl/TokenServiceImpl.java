@@ -28,7 +28,8 @@ public class TokenServiceImpl implements TokenService {
     UserRepo userRepo;
     private final TokenRepo tokenRepo;
 
-    LocalDate localdate = LocalDate.now();
+    long mills = System.currentTimeMillis();
+    java.sql.Date date = new java.sql.Date(mills);
 
     public TokenServiceImpl(TokenRepo tokenRepo) {
         this.tokenRepo = tokenRepo;
@@ -46,7 +47,7 @@ public class TokenServiceImpl implements TokenService {
         entity.setUsername(logInController.loggedInUserDetail.get(userController.UserName));
         entity.setEmail(userRepo.getEmailByUserName(logInController.loggedInUserDetail.get(userController.UserName)));
         entity.setStatus(0);
-        entity.setDate(localdate);
+        entity.setDate(date.toLocalDate());
         entity=tokenRepo.save(entity);
         return tokenDto.builder()
                 .token_id(entity.getToken_id())
