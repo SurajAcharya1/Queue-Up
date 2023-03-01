@@ -82,7 +82,7 @@
                 <h1 th:text="${turn}"></h1>
             </div>
             <div th:if="${tokenInfo}==null">
-                <button>Get Token Here</button>
+                <a th:href="@{~/user/userPanel/}+${userName}"><button id="genericButton">Get Token Here</button></a>
             </div>
         </div>
        </main>

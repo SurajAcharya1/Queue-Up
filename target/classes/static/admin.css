@@ -50,7 +50,7 @@
 .sidebar-menu a:hover{
     background-color: #fff;
     color: var(--primary-color);
-        background: #fff;
+    background: #fff;
     padding-top: 16px;
     padding-bottom: 16px;
     color: var(--primary-color);
@@ -113,7 +113,7 @@ header label span {
 .search-wrapper span{
     display: inline-block;
     padding: 16px 0px 0px 16px;
-    
+
 }
 
 
@@ -129,9 +129,9 @@ header label span {
 }
 
 .user-wrapper small {
-        display: inline-block;
-        color: var(--light-color);
-        margin-top: -10px !important;
+    display: inline-block;
+    color: var(--light-color);
+    margin-top: -10px !important;
 }
 
 .user-wrapper h4{
@@ -196,7 +196,7 @@ table{
 .card-header,
 .card-body{
     padding: 16px;
-    
+
 }
 
 .card-header{
@@ -278,7 +278,7 @@ td .status.yellow {
     font-size: .8rem;
     font-weight: 700;
     color: #222;
-    
+
 }
 .info img{
     border-radius: 50%;
@@ -298,24 +298,24 @@ td .status.yellow {
 }
 
 #nav-toggle:checked + .sidebar{
-   width: 70px;
+    width: 70px;
 }
 
 #nav-toggle:checked + .sidebar .sidebar-brand ,
 #nav-toggle:checked + .sidebar li{
     padding-left: 16px;
     text-align: center;
- }
+}
 
- #nav-toggle:checked ~ .main-content{
+#nav-toggle:checked ~ .main-content{
     margin-left: 70px;
- }
+}
 
 
 #nav-toggle:checked + .sidebar .sidebar-brand h2 span:last-child,
 #nav-toggle:checked + .sidebar li a span:last-child    {
     display: none;
- }
+}
 
 #cancel,
 #delete{
@@ -338,6 +338,7 @@ td .status.yellow {
     border-radius: 5px;
 }
 
+#genericButton,
 #absent {
     display: inline-block;
     padding: 5px 15px;
@@ -356,6 +357,7 @@ td .status.yellow {
     border: none;
     border-radius: 5px;
 }
+#genericButton:hover,
 #absent:hover,
 #finish:hover,
 #cancel:hover,
