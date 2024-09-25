@@ -8,6 +8,7 @@ import com.queueup.qup.dto.TokenHistoryDto;
 import com.queueup.qup.repository.KeyRepo;
 import com.queueup.qup.repository.TokenRepo;
 import com.queueup.qup.repository.UserRepo;
+import com.queueup.qup.service.AverageTokenProcessTimeCalculatorService;
 import com.queueup.qup.service.EmailSenderService;
 import com.queueup.qup.service.TokenHistoryService;
 import com.queueup.qup.service.impl.TokenHistoryServiceImpl;
@@ -44,8 +45,11 @@ public class UserController{
     EmailSenderService senderService;
     private final TokenServiceImpl tokenService;
 
-    public UserController(@Lazy TokenServiceImpl tokenService) {
+    private final AverageTokenProcessTimeCalculatorService averageTokenProcessTimeCalculatorService;
+
+    public UserController(@Lazy TokenServiceImpl tokenService, AverageTokenProcessTimeCalculatorService averageTokenProcessTimeCalculatorService) {
         this.tokenService = tokenService;
+        this.averageTokenProcessTimeCalculatorService = averageTokenProcessTimeCalculatorService;
     }
     @GetMapping("/{user_name}")
     public String openUserPanelPage(@PathVariable("user_name") String user_name,Model model){
@@ -56,6 +60,7 @@ public class UserController{
                 model.addAttribute("key",keyRepo.getKey());
                 model.addAttribute("tokenDto", new TokenDto());
                 model.addAttribute("userName",logInController.loggedInUserDetail.get(user_name));
+                model.addAttribute("averageTokenProcessTime",averageTokenProcessTimeCalculatorService.getAverageTokenProcessTime());
                 logInController.userName=null;
                 return "users/userPanel";
             }
