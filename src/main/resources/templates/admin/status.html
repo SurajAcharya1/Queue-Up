@@ -144,11 +144,18 @@
                         <a th:href="@{~/admin/status/absent/} + ${currentToken} +@{/}+ ${userName}"><button id="absent">Absent</button></a>
                         <a th:href="@{~/admin/status/cancel/} + ${currentToken} +@{/}+ ${userName}"><button id="cancel">Cancel</button></a>
                     </div>
-            </div>
+                </div>
+                <h2>Average Token Process Time</h2>
+                <div class="card-single">
+                    <div>
+                        <small>Average Token Precess Time</small>
+                        <h1 th:text="${averageTokenProcessTime}"></h1>
+                    </div>
+                </div>
             </div>
 <hr>
 
-            <div class="users-grid">
+            <div class="users-grid" style="margin-top: 2rem">
                 <div class="users-status">
                    <div class="card">
                        <div class="card-header">

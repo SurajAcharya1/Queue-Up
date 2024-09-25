@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Date;
+
 @Controller
 @RequestMapping("/user/token")
 public class UserTokenController{
@@ -57,14 +59,14 @@ public class UserTokenController{
 
     @GetMapping("/absent/{token_number}/{user_name}")
     public String setStatusToAbsent(@PathVariable("token_number") Integer token_number,@PathVariable("user_name") String user_name){
-            tokenRepo.setUserStatusToAbsent(token_number);
+            tokenRepo.setUserStatusToAbsent(token_number, new Date());
             tokenRepo.setStatusChangedByUser(token_number);
             return "redirect:/user/userPanel/"+user_name;
     }
 
     @GetMapping("/cancel/{token_number}/{user_name}")
     public String setStatusToCancelled(@PathVariable("token_number") Integer token_number, @PathVariable("user_name") String user_name){
-            tokenRepo.setUserStatusToCancelled(token_number);
+            tokenRepo.setUserStatusToCancelled(token_number, new Date());
             tokenRepo.setStatusChangedByUser(token_number);
             return "redirect:/user/userPanel/"+user_name;
     }

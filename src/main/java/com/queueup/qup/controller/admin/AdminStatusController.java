@@ -4,6 +4,7 @@ import com.queueup.qup.controller.LogInController;
 import com.queueup.qup.dto.TokenGapDto;
 import com.queueup.qup.repository.TokenRepo;
 import com.queueup.qup.repository.UserRepo;
+import com.queueup.qup.service.AverageTokenProcessTimeCalculatorService;
 import com.queueup.qup.service.EmailSenderService;
 import com.queueup.qup.service.impl.TokenServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.Date;
 
 @Controller
 @RequestMapping("/admin/status")
@@ -31,10 +34,15 @@ public class AdminStatusController {
     private final EmailSenderService senderService;
     private final TokenServiceImpl tokenService;
 
-    public AdminStatusController(EmailSenderService senderService, TokenServiceImpl tokenService) {
+    private final AverageTokenProcessTimeCalculatorService averageTokenProcessTimeCalculatorService;
+
+
+
+    public AdminStatusController(EmailSenderService senderService, TokenServiceImpl tokenService, AverageTokenProcessTimeCalculatorService averageTokenProcessTimeCalculatorService) {
         this.senderService = senderService;
 
         this.tokenService = tokenService;
+        this.averageTokenProcessTimeCalculatorService = averageTokenProcessTimeCalculatorService;
     }
 
     Integer tokenGap=10;    //Define the token gap Here
@@ -61,6 +69,8 @@ public class AdminStatusController {
                 model.addAttribute("currentToken", tokenRepo.getCurrentUserTokenNumber());
                 model.addAttribute("userName",logInController.loggedInUserDetail.get(user_name));
                 model.addAttribute("tokenGap",tokenGap);
+                model.addAttribute("averageTokenProcessTime",
+                        averageTokenProcessTimeCalculatorService.getAverageTokenProcessTime());
                 return "admin/status";
             } else {
                 return "error";
@@ -85,12 +95,12 @@ public class AdminStatusController {
                     "Your turn is about to come please get to Queue as soon as possible. \n" +
                             "Number of people in queue before you: "+tokenGap);
             redirectAttributes.addFlashAttribute("mail","Mail sent successfully");
-            tokenRepo.setUserStatustoComplete(token_number);
+            tokenRepo.setUserStatustoComplete(token_number, new Date());
             tokenRepo.setStatusChangedByAdmin(token_number);
             return "redirect:/admin/status/"+user_name;
         }catch(Exception e){
             redirectAttributes.addFlashAttribute("mail","Could not send Mail");
-            tokenRepo.setUserStatustoComplete(token_number);
+            tokenRepo.setUserStatustoComplete(token_number, new Date());
             tokenRepo.setStatusChangedByAdmin(token_number);
             return "redirect:/admin/status/"+user_name;
         }
@@ -104,12 +114,12 @@ public class AdminStatusController {
                     "Your turn is about to come please get to Queue as soon as possible. \n" +
                             "Number of people in queue before you: "+tokenGap);
             redirectAttributes.addFlashAttribute("mail","Mail sent successfully");
-            tokenRepo.setUserStatusToAbsent(token_number);
+            tokenRepo.setUserStatusToAbsent(token_number, new Date());
             tokenRepo.setStatusChangedByAdmin(token_number);
             return "redirect:/admin/status/"+user_name;
         }catch(Exception e){
             redirectAttributes.addFlashAttribute("mail","Could not send Mail");
-            tokenRepo.setUserStatusToAbsent(token_number);
+            tokenRepo.setUserStatusToAbsent(token_number, new Date());
             tokenRepo.setStatusChangedByAdmin(token_number);
             return "redirect:/admin/status/"+user_name;
         }
@@ -123,12 +133,12 @@ public class AdminStatusController {
                     "Your turn is about to come please get to Queue as soon as possible. \n" +
                             "Number of people in queue before you: "+tokenGap);
             redirectAttributes.addFlashAttribute("mail","Mail sent successfully");
-            tokenRepo.setUserStatusToCancelled(token_number);
+            tokenRepo.setUserStatusToCancelled(token_number, new Date());
             tokenRepo.setStatusChangedByAdmin(token_number);
             return "redirect:/admin/status/"+user_name;
         }catch(Exception e){
             redirectAttributes.addFlashAttribute("mail","Could not send Mail");
-            tokenRepo.setUserStatusToCancelled(token_number);
+            tokenRepo.setUserStatusToCancelled(token_number, new Date());
             tokenRepo.setStatusChangedByAdmin(token_number);
             return "redirect:/admin/status/"+user_name;
         }

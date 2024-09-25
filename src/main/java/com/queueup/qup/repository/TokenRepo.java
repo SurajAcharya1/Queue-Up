@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
+import java.util.Date;
+import java.util.List;
 
 public interface TokenRepo extends JpaRepository<Token, Integer> {
 
@@ -27,18 +29,18 @@ public interface TokenRepo extends JpaRepository<Token, Integer> {
 
     @Modifying
     @Transactional
-    @Query(value = "update tbl_token set status = 1 where token_number = ?1", nativeQuery = true)
-    public void setUserStatustoComplete(Integer token_number);
+    @Query(value = "update tbl_token set status = 1, token_completion_time = ?2 where token_number = ?1", nativeQuery = true)
+    public void setUserStatustoComplete(Integer token_number, Date token_completion_time);
 
     @Modifying
     @Transactional
-    @Query(value = "update tbl_token set status = 2 where token_number = ?1", nativeQuery = true)
-    public void setUserStatusToAbsent(Integer token_number);
+    @Query(value = "update tbl_token set status = 2, token_completion_time = ?2 where token_number = ?1", nativeQuery = true)
+    public void setUserStatusToAbsent(Integer token_number, Date token_completion_time);
 
     @Modifying
     @Transactional
-    @Query(value = "update tbl_token set status = 3 where token_number = ?1", nativeQuery = true)
-    public void setUserStatusToCancelled(Integer token_number);
+    @Query(value = "update tbl_token set status = 3, token_completion_time = ?2 where token_number = ?1", nativeQuery = true)
+    public void setUserStatusToCancelled(Integer token_number, Date token_completion_time);
 
     @Modifying
     @Transactional
@@ -77,4 +79,7 @@ public interface TokenRepo extends JpaRepository<Token, Integer> {
 
     @Query(value = "select status from tbl_token where username = ?1", nativeQuery = true)
     public Integer getTokenStatus(String username);
+
+    @Query(value = "select token_completion_time from tbl_token", nativeQuery = true)
+    public List<Date> getAllTokenCompletionTime();
 }

@@ -48,6 +48,7 @@ public class TokenServiceImpl implements TokenService {
         entity.setEmail(userRepo.getEmailByUserName(logInController.loggedInUserDetail.get(userController.UserName)));
         entity.setStatus(0);
         entity.setDate(date.toLocalDate());
+        entity.setToken_completion_time(null);
         entity=tokenRepo.save(entity);
         return tokenDto.builder()
                 .token_id(entity.getToken_id())
@@ -70,6 +71,7 @@ public class TokenServiceImpl implements TokenService {
                         .statusChangedBy(token.getStatusChangedBy())
                         .email(token.getEmail())
                         .date(token.getDate())
+                        .token_completion_time(token.getToken_completion_time())
                         .build()
         ).collect(Collectors.toList());
     }

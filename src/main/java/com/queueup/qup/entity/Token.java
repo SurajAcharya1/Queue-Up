@@ -6,6 +6,7 @@ import org.hibernate.id.IntegralDataTypeHolder;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Table(name = "tbl_token", uniqueConstraints = {
@@ -50,4 +51,7 @@ public class Token implements Serializable {
 
     @Column(name="date")
     private LocalDate date;
+
+    @Column(name="token_completion_time")
+    private Date token_completion_time;
 }
