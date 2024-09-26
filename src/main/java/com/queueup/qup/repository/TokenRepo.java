@@ -82,4 +82,7 @@ public interface TokenRepo extends JpaRepository<Token, Integer> {
 
     @Query(value = "select token_completion_time from tbl_token", nativeQuery = true)
     public List<Date> getAllTokenCompletionTime();
+
+    @Query(value = "select token_creation_time from tbl_token where token_number = 1", nativeQuery = true)
+    public Date getTokenCreationTimeOfFirstToken();
 }

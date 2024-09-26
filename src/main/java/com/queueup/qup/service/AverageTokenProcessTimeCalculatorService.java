@@ -27,7 +27,7 @@ public class AverageTokenProcessTimeCalculatorService {
         long totalDifferenceInMillis = 0;
         for (int i = 0; i < times.size(); i++) {
             if (i == 0) {
-                long difference = Math.abs(new Date().getTime() - times.get(i).getTime());
+                long difference = Math.abs(tokenRepo.getTokenCreationTimeOfFirstToken().getTime() - times.get(i).getTime());
                 totalDifferenceInMillis += difference;
             } else {
                 long difference = Math.abs(times.get(i).getTime() - times.get(i - 1).getTime());

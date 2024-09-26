@@ -23,4 +23,5 @@ public class TokenDto {
     private String email;
     private LocalDate date;
     private Date token_completion_time;
+    private Date token_creation_time;
 }

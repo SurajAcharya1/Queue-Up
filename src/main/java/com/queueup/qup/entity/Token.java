@@ -52,6 +52,9 @@ public class Token implements Serializable {
     @Column(name="date")
     private LocalDate date;
 
+    @Column(name="token_creation_time")
+    private Date token_creation_time;
+
     @Column(name="token_completion_time")
     private Date token_completion_time;
 }

@@ -77,7 +77,7 @@
                         </span>
                         <span th:if="${tokenMessage=='Token Generated Successfully!!!'}">
                             <span>
-                                <h3  style="color: green;" th:text="${tokenMessage}"></h3>
+                                <h3 style="color: green;" th:text="${tokenMessage}"></h3>
                             </span>
                         </span>
                     </form>
@@ -85,6 +85,14 @@
             </div>
         </div><br>
 <hr>
+            <strong style="font-size: larger; margin-top: 2rem">Average Token Process Time: </strong>
+            <u th:text="${averageTokenProcessTime}"></u>
+            <!--<div class="card-single">
+                <div>
+                    <small>Average Token Precess Time</small>
+                    <h1 th:text="${averageTokenProcessTime}"></h1>
+                </div>
+            </div>-->
             <!-- Key Enter garepaxi Queue ko Status-->
             <div class="token-header">
                 <h1> <h1>My Token Number</h1></h1>

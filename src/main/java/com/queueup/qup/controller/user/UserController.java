@@ -55,6 +55,8 @@ public class UserController{
     public String openUserPanelPage(@PathVariable("user_name") String user_name,Model model){
         try{
             if(userRepo.getRoleByUserName(logInController.loggedInUserDetail.get(user_name)).equals("USER")){
+                tokenRepo.deleteTokenView();
+                tokenRepo.createTokenView();
 //                logInController.loggedInUserDetail.put(user_name,logInController.userName);
                 model.addAttribute("tokenNumber",tokenRepo.getTokenNumberByUsername(logInController.loggedInUserDetail.get(user_name)));
                 model.addAttribute("key",keyRepo.getKey());
@@ -81,8 +83,6 @@ public class UserController{
             if(keyRepo.getKeyFromLogin(key).equals(key)) {
                 tokenDto = tokenService.save(tokenDto);
                 tokenHistoryDto = tokenHistoryService.save(tokenHistoryDto);
-                tokenRepo.deleteTokenView();
-                tokenRepo.createTokenView();
                 redirectAttributes.addFlashAttribute("tokenMessage", "Token Generated Successfully!!!");
             }
         }catch (Exception e) {

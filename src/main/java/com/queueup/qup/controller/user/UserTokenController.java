@@ -4,10 +4,12 @@ package com.queueup.qup.controller.user;
 import com.queueup.qup.controller.LogInController;
 import com.queueup.qup.repository.TokenRepo;
 import com.queueup.qup.repository.UserRepo;
+import com.queueup.qup.service.AverageTokenProcessTimeCalculatorService;
 import com.queueup.qup.service.EmailSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +30,12 @@ public class UserTokenController{
     @Autowired
     EmailSenderService senderService;
 
+    private final AverageTokenProcessTimeCalculatorService averageTokenProcessTimeCalculatorService;
+
+    public UserTokenController(AverageTokenProcessTimeCalculatorService averageTokenProcessTimeCalculatorService) {
+        this.averageTokenProcessTimeCalculatorService = averageTokenProcessTimeCalculatorService;
+    }
+
     @GetMapping("/{user_name}")
     public String openUserTokenPage(Model model, @PathVariable("user_name") String user_name){
         try{
@@ -36,6 +44,11 @@ public class UserTokenController{
                 model.addAttribute("userName",logInController.loggedInUserDetail.get(user_name));
                 model.addAttribute("currentToken",tokenRepo.getCurrentUserTokenNumber());
                 model.addAttribute("tokenNumber", tokenRepo.getTokenNumberByUsername(logInController.loggedInUserDetail.get(user_name)));
+                model.addAttribute("averageTokenProcessTime", averageTokenProcessTimeCalculatorService.getAverageTokenProcessTime());
+                float processTime = Float.parseFloat(averageTokenProcessTimeCalculatorService.getAverageTokenProcessTime().replaceAll(" minute/s", ""));
+                System.out.println(processTime + "jshgdfs");
+                model.addAttribute("estimatedTimeForTurn",
+                        ((!ObjectUtils.isEmpty(tokenRepo.getTokenNumberByUsername(logInController.loggedInUserDetail.get(user_name))) ? tokenRepo.getTokenNumberByUsername(logInController.loggedInUserDetail.get(user_name)) : tokenRepo.getCurrentUserTokenNumber() - tokenRepo.getCurrentUserTokenNumber()) * processTime) + " minute/s");
                 if(tokenRepo.getTokenNumberByUsername(logInController.loggedInUserDetail.get(user_name))==null){
                     model.addAttribute("turn","You Do Not Have Any Token Assigned To Your Account.");
                 }else{

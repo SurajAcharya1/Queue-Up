@@ -78,6 +78,20 @@
                 <a th:href="@{~/user/token/absent/} + ${tokenNumber} +@{/}+ ${userName}"><button id="absent">Absent</button></a>
                 </div>
             </div>
+            <h2>Average Token Process Time</h2>
+            <div class="card-single">
+                <div>
+                    <small>Average Token Precess Time</small>
+                    <h1 th:text="${averageTokenProcessTime}"></h1>
+                </div>
+            </div>
+            <h2>Estimated Time For Your Turn</h2>
+            <div class="card-single">
+                <div>
+                    <small>Estimated Time For Your Turn</small>
+                    <h1 th:text="${estimatedTimeForTurn}"></h1>
+                </div>
+            </div>
             <div>
                 <h1 th:text="${turn}"></h1>
             </div>

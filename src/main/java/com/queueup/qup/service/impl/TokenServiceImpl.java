@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,6 +50,7 @@ public class TokenServiceImpl implements TokenService {
         entity.setStatus(0);
         entity.setDate(date.toLocalDate());
         entity.setToken_completion_time(null);
+        entity.setToken_creation_time(new Date());
         entity=tokenRepo.save(entity);
         return tokenDto.builder()
                 .token_id(entity.getToken_id())
@@ -72,6 +74,7 @@ public class TokenServiceImpl implements TokenService {
                         .email(token.getEmail())
                         .date(token.getDate())
                         .token_completion_time(token.getToken_completion_time())
+                        .token_creation_time(token.getToken_creation_time())
                         .build()
         ).collect(Collectors.toList());
     }
